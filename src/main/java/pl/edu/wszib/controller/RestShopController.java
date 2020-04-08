@@ -17,22 +17,22 @@ public class RestShopController {
 
     @GetMapping("products")
     public List<Product> products() {
-        return productDao.getProducts();
+        return (List)productDao.findAll();
     }
 
     @DeleteMapping("products/remove/{id}")
     public void removeProduct(@PathVariable Long id) {
-        productDao.removeProduct(id);
+        productDao.deleteById(id);
     }
 
     @PostMapping("products/save")
     public void saveProduct(@RequestBody Product product) {
-        productDao.saveProduct(product);
+        productDao.save(product);
     }
 
     @GetMapping("products/single/{id}")
     public Product getProduct(@PathVariable Long id) {
-        return productDao.getById(id);
+        return productDao.findById(id).get();
     }
 
 }

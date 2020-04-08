@@ -33,13 +33,13 @@ public class ShopController {
 
     @GetMapping("products")
     public String products(Model model) {
-        model.addAttribute("productList", productDao.getProducts());
+        model.addAttribute("productList", productDao.findAll());
         return "products";
     }
 
     @GetMapping("products/remove/{id}")
     public String removeProduct(@PathVariable Long id) {
-        productDao.removeProduct(id);
+        productDao.deleteById(id);
         return "redirect:/products";
     }
 
@@ -51,13 +51,13 @@ public class ShopController {
 
     @PostMapping("products/save")
     public String saveNewProduct(Product product) {
-        productDao.saveProduct(product);
+        productDao.save(product);
         return "redirect:/products";
     }
 
     @GetMapping("products/edit/{id}")
     public String editProduct(@PathVariable Long id, Model model) {
-        Product product = productDao.getById(id);
+        Product product = productDao.findById(id).get();
         model.addAttribute("product", product);
         return "product";
     }

@@ -1,11 +1,21 @@
 package pl.edu.wszib.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private int quantity;
     private double price;
     private boolean available;
+
+    public Product() {
+    }
 
     public long getId() {
         return id;
